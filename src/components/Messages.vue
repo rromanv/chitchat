@@ -7,24 +7,24 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useTimeoutFn } from '@vueuse/core'
+  import { ref, onMounted } from 'vue'
+  import { useTimeoutFn } from '@vueuse/core'
 
-import { database } from '~/helpers/useFirebase'
-const { messages } = database()
+  import { database } from '~/helpers/useFirebase'
+  const { messages } = database()
 
-const bottom = ref()
+  const bottom = ref()
 
-const { isPending, start, stop } = useTimeoutFn(() => {
-  window.scrollTo({
-    top: document.body.scrollHeight || document.documentElement.scrollHeight,
-    behavior: 'smooth',
-  })
-}, 500)
+  const { isPending, start, stop } = useTimeoutFn(() => {
+    window.scrollTo({
+      top: document.body.scrollHeight || document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    })
+  }, 500)
 
-onMounted(() => goToBottom())
+  onMounted(() => goToBottom())
 
-const goToBottom = () => {
-  start()
-}
+  const goToBottom = () => {
+    start()
+  }
 </script>

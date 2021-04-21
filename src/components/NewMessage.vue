@@ -8,27 +8,27 @@
       class="flex-grow text-xl font-thin focus:outline-none"
       @change="send"
     />
-    <button class="bg-yellow-300 px-8 focus:outline-none" @click="send">
+    <button class="px-8 bg-yellow-300 focus:outline-none" @click="send">
       <mdi:send class="text-yellow-900" />
     </button>
   </div>
 </template>
 
 <script setup>
-import { ref, defineEmit } from 'vue'
-import { database } from '~/helpers/useFirebase'
+  import { ref, defineEmit } from 'vue'
+  import { database } from '~/helpers/useFirebase'
 
-const { sendMessage } = database()
+  const { sendMessage } = database()
 
-const newMessage = ref(null)
+  const newMessage = ref(null)
 
-const emit = defineEmit(['added'])
+  const emit = defineEmit(['added'])
 
-const send = () => {
-  if (newMessage.value?.length > 0) {
-    sendMessage(newMessage.value)
-    newMessage.value = null
-    emit('added')
+  const send = () => {
+    if (newMessage.value?.length > 0) {
+      sendMessage(newMessage.value)
+      newMessage.value = null
+      emit('added')
+    }
   }
-}
 </script>

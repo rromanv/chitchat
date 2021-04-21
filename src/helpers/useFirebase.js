@@ -28,15 +28,15 @@ export const database = () => {
     .orderBy('createdAt', 'desc')
     .limit(100)
 
-  const unsubscribe = messagesQuery.onSnapshot(s => {
+  const unsubscribe = messagesQuery.onSnapshot((s) => {
     messages.value = s.docs
-      .map(doc => ({ id: doc.id, ...doc.data() }))
+      .map((doc) => ({ id: doc.id, ...doc.data() }))
       .reverse()
   })
 
   onUnmounted(unsubscribe)
 
-  const sendMessage = text => {
+  const sendMessage = (text) => {
     if (!isAuthenticated.value) return
     const { photoURL, uid, displayName } = user.value
     messagesCollection.add({
